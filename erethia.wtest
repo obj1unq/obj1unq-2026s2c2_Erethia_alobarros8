@@ -1,3 +1,35 @@
 import rolando.*
 describe "Erethia" {
+
+      test "Rolando tiene la mochila vacía al inicio, recolecta espada y libro, pero ignora el collar por capacidad" {
+    
+    assert.equals([], rolando.mochila())
+
+    
+    rolando.encontrar(espadaDelDestino)
+    assert.equals([espadaDelDestino], rolando.mochila())
+
+    
+    rolando.encontrar(libroDeHechizos)
+    assert.equals([espadaDelDestino, libroDeHechizos], rolando.mochila())
+
+    
+    rolando.encontrar(collarDivino)
+    
+    
+    assert.equals([espadaDelDestino, libroDeHechizos], rolando.mochila())
+  }
+
+  test "Se puede incrementar la capacidad de la mochila para poder recolectar más artefactos" {
+    
+    rolando.capacidadMochila(3)
+    
+    rolando.encontrar(espadaDelDestino)
+    rolando.encontrar(libroDeHechizos)
+    
+    
+    rolando.encontrar(collarDivino)
+    
+    assert.equals([espadaDelDestino, libroDeHechizos, collarDivino], rolando.mochila())
+  }
 }
