@@ -26,9 +26,28 @@ object rolando {
   method tieneEspacioEnMochila() {
     return mochila.size() < capacidadMochila
   }  
+  
+  method llegarAHogar() {
+    castilloDePiedra.almacenar(mochila)
+    mochila.clear() 
+  }
 }
 
 object espadaDelDestino {}
 object libroDeHechizos {}
 object collarDivino {}
 object armaduraDeAceroValyrio {}
+
+object castilloDePiedra {
+  const baulCastillo = [] 
+
+  
+  method baulCastillo() {
+    return baulCastillo
+  }
+
+  
+  method almacenar(artefactos) {
+    baulCastillo.addAll(artefactos)
+  }
+}
