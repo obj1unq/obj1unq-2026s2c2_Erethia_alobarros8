@@ -1,8 +1,12 @@
 object rolando {
   var capacidadMochila = 2
   const mochila = [] 
-
+  const historialEncuentros = []
   
+   method historialEncuentros() {
+    return historialEncuentros
+  }
+
   method capacidadMochila() {
     return capacidadMochila
     }
@@ -15,14 +19,13 @@ object rolando {
     return mochila
   }
 
-  
   method encontrar(artefacto) {
+    historialEncuentros.add(artefacto)
     if (self.tieneEspacioEnMochila()) {
       mochila.add(artefacto)
     }
   }
 
-  
   method tieneEspacioEnMochila() {
     return mochila.size() < capacidadMochila
   }  
@@ -35,7 +38,6 @@ object rolando {
     return (mochila + castilloDePiedra.baulCastillo()).asSet()
   }
 
-  // Consulta: Saber si Rolando posee un artefacto en particular
   method posee(artefacto) {
     return self.posesiones().contains(artefacto)
   }

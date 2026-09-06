@@ -94,4 +94,29 @@ describe "Erethia" {
 
     assert.notThat(rolando.posee(libroDeHechizos))
   }
+
+   test "Historial de encuentros registra el orden cronológico exacto de encuentros, sin importar si los recolectó o no " {
+   
+    rolando.encontrar(espadaDelDestino)
+    
+    rolando.encontrar(libroDeHechizos)
+    
+    rolando.encontrar(collarDivino)
+   
+    rolando.llegarAHogar()
+    
+    rolando.encontrar(armaduraDeAceroValyrio)
+    
+    rolando.encontrar(collarDivino)
+    
+    const historialEsperado = [
+      espadaDelDestino,
+      libroDeHechizos,
+      collarDivino,
+      armaduraDeAceroValyrio,
+      collarDivino
+    ]
+    
+    assert.equals(historialEsperado, rolando.historialEncuentros())
+  }
 }
