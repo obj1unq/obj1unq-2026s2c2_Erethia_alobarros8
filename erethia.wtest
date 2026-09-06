@@ -75,4 +75,23 @@ describe "Erethia" {
     
     assert.equals([espadaDelDestino, libroDeHechizos], rolando.mochila())
   }
+
+  test "Saber las posesiones totales de Rolando y si posee un artefacto en particular " {
+  
+    
+   
+    rolando.encontrar(collarDivino)
+    rolando.encontrar(espadaDelDestino)
+    rolando.llegarAHogar()
+    
+    rolando.encontrar(armaduraDeAceroValyrio)
+    
+    assert.equals(#{collarDivino, espadaDelDestino, armaduraDeAceroValyrio}, rolando.posesiones())
+
+    assert.that(rolando.posee(collarDivino))
+    assert.that(rolando.posee(espadaDelDestino))
+    assert.that(rolando.posee(armaduraDeAceroValyrio))
+
+    assert.notThat(rolando.posee(libroDeHechizos))
+  }
 }

@@ -31,6 +31,15 @@ object rolando {
     castilloDePiedra.almacenar(mochila)
     mochila.clear() 
   }
+   method posesiones() {
+    return (mochila + castilloDePiedra.baulCastillo()).asSet()
+  }
+
+  // Consulta: Saber si Rolando posee un artefacto en particular
+  method posee(artefacto) {
+    return self.posesiones().contains(artefacto)
+  }
+
 }
 
 object espadaDelDestino {}
