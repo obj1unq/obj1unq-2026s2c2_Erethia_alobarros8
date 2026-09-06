@@ -32,4 +32,47 @@ describe "Erethia" {
     
     assert.equals([espadaDelDestino, libroDeHechizos, collarDivino], rolando.mochila())
   }
+
+   test "El Castillo de Piedra permite almacenar artefactos ilimitados liberando espacio en la mochila" {
+    
+    assert.equals([], rolando.mochila())
+    assert.equals([], castilloDePiedra.baulCastillo())
+
+    
+    rolando.encontrar(espadaDelDestino)
+    assert.equals([espadaDelDestino], rolando.mochila())
+
+    
+    rolando.encontrar(libroDeHechizos)
+    assert.equals([espadaDelDestino, libroDeHechizos], rolando.mochila())
+
+    
+    rolando.llegarAHogar()
+    
+    
+    assert.equals([], rolando.mochila())
+    
+    assert.equals([espadaDelDestino, libroDeHechizos], castilloDePiedra.baulCastillo())
+
+    
+    rolando.encontrar(collarDivino)
+    assert.equals([collarDivino], rolando.mochila())
+
+    
+    rolando.llegarAHogar()
+
+   
+    assert.equals([], rolando.mochila())
+    
+    assert.equals([espadaDelDestino, libroDeHechizos, collarDivino], castilloDePiedra.baulCastillo())
+  }
+
+  test "Capacidad de la mochila se respeta antes de ir al castillo" {
+    
+    rolando.encontrar(espadaDelDestino)
+    rolando.encontrar(libroDeHechizos)
+    rolando.encontrar(collarDivino) 
+    
+    assert.equals([espadaDelDestino, libroDeHechizos], rolando.mochila())
+  }
 }
