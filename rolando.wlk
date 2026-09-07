@@ -3,6 +3,24 @@ object rolando {
   const mochila = [] 
   const historialEncuentros = []
   var vivienda = castilloDePiedra
+  var poderBase = 5
+  const artefactosUsadosEnBatallas = []
+
+  method poderDeBatalla() {
+    return mochila.sum { artefacto => artefacto.poderDeBatalla(self) } + poderBase
+  }
+
+  method artefactosUsadosEnBatalla() = artefactosUsadosEnBatallas
+
+  method agregarAArtefactosUsadosEnBatalla(artefactos){
+    artefactosUsadosEnBatallas.add(artefactos)
+  }
+
+  method poderBase(_poderBase){
+    poderBase = _poderBase
+  } 
+
+  method poderBase() = poderBase
 
   method vivienda(_vivienda) {
     vivienda = _vivienda
@@ -57,12 +75,40 @@ object rolando {
     return self.posesiones().contains(artefacto)
   }
 
+  method batalla() {
+    artefactosUsadosEnBatallas.addAll(mochila)
+    poderBase += 1
+  }
+
 }
 
-object espadaDelDestino {}
-object libroDeHechizos {}
-object collarDivino {}
-object armaduraDeAceroValyrio {}
+object espadaDelDestino {
+
+method poderDeBatalla(personaje) {
+  return if (personaje.artefactosUsadosEnBatalla().contains(self)){
+      personaje.poderBase() * 0.50
+    }else{
+      personaje.poderBase()
+    }
+  }
+}
+object libroDeHechizos {
+
+}
+object collarDivino {
+method poderDeBatalla(personaje){
+    return if (personaje.poderBase() > 6){
+      3 + personaje.artefactosUsadosEnBatalla().count(self)
+    }else{
+      3
+    }
+  }  
+}
+object armaduraDeAceroValyrio {
+method poderDeBatalla(personaje) {
+    return 6
+  }
+}
 
 object castilloDePiedra {
   const baulCastillo = [] 
