@@ -14,7 +14,7 @@ describe "Erethia" {
     assert.equals([espadaDelDestino, libroDeHechizos], rolando.mochila())
 
     
-    rolando.encontrar(collarDivino)
+    assert.throwsException({ rolando.encontrar(collarDivino) })
     
     
     assert.equals([espadaDelDestino, libroDeHechizos], rolando.mochila())
@@ -71,7 +71,7 @@ describe "Erethia" {
     
     rolando.encontrar(espadaDelDestino)
     rolando.encontrar(libroDeHechizos)
-    rolando.encontrar(collarDivino) 
+    assert.throwsException({ rolando.encontrar(collarDivino)  })
     
     assert.equals([espadaDelDestino, libroDeHechizos], rolando.mochila())
   }
@@ -101,7 +101,7 @@ describe "Erethia" {
     
     rolando.encontrar(libroDeHechizos)
     
-    rolando.encontrar(collarDivino)
+   assert.throwsException({ rolando.encontrar(collarDivino) }) 
    
     rolando.llegarAHogar()
     
