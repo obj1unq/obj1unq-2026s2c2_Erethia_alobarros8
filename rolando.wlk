@@ -34,17 +34,12 @@ object rolando {
 
   method encontrar(artefacto) {
     self.agregarHitorialDeEncuentros(artefacto)
-    self.validarRecoletar(artefacto)
-  }
-
-method validarRecoletar(artefacto){
-if (not self.tieneEspacioEnMochila()) {
-      self.error("no se puede recolectar el artefacto, la mochila esta llena")
-    }else{
+    if (self.tieneEspacioEnMochila()) {
       mochila.add(artefacto)
     }
+  }
 
-}
+
 
   method tieneEspacioEnMochila() {
     return mochila.size() < capacidadMochila
