@@ -179,7 +179,7 @@ describe "Erethia" {
 
   }
 
-  test "Erolando el personaje mas poderoso de erethia, tiene que vencer a todos los enemigos(Parte 2.4)" {
+  test "Rolando el personaje mas poderoso de erethia, tiene que vencer a todos los enemigos(Parte 2.4) , Y tiene artefacto contra astra pero no contra caterina (parte 2.5)" {
 
     rolando.poderBase(10)
     rolando.capacidadMochila(3)
