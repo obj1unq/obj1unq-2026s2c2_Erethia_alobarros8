@@ -77,6 +77,7 @@ object rolando {
 
   method batalla() {
     artefactosUsadosEnBatallas.addAll(mochila)
+     mochila.forEach({ artefacto => artefacto.usar(self) })
     poderBase += 1
   }
 
@@ -91,10 +92,58 @@ method poderDeBatalla(personaje) {
       personaje.poderBase()
     }
   }
+method usar(personaje) {}
 }
 object libroDeHechizos {
+  const hechizos = []
 
+  method hechizos() = hechizos
+
+  method hechizos(_hechizos) {
+    hechizos.clear()
+    hechizos.addAll(_hechizos)
+  }
+
+  method agregarHechizo(hechizo) {
+    hechizos.add(hechizo)
+  }
+
+  method poderDeBatalla(personaje) {
+    return if (not hechizos.isEmpty()) {
+      hechizos.first().poderDeBatalla(personaje)
+    } else {
+      0
+    }
+  }
+
+  method usar(personaje) {
+    if (not hechizos.isEmpty()) {
+      hechizos.remove(hechizos.first())
+    }
+  }
 }
+
+object bendicion {
+  method poderDeBatalla(personaje) = 4
+}
+
+object invisibilidad {
+  method poderDeBatalla(personaje) = personaje.poderBase()
+}
+
+object invocacion {
+  method poderDeBatalla(personaje) {
+    const artefactosEnMorada = personaje.vivienda().baulCastillo()
+    return if (not artefactosEnMorada.isEmpty()) {
+      const masPoderoso = artefactosEnMorada.max({ artefacto => artefacto.poderDeBatalla(personaje) })
+      masPoderoso.poderDeBatalla(personaje)
+    } else {
+      0
+    }
+  }
+}
+
+
 object collarDivino {
 method poderDeBatalla(personaje){
     return if (personaje.poderBase() > 6){
@@ -103,11 +152,13 @@ method poderDeBatalla(personaje){
       3
     }
   }  
+method usar(personaje) {}
 }
 object armaduraDeAceroValyrio {
 method poderDeBatalla(personaje) {
     return 6
   }
+method usar(personaje) {}
 }
 
 object castilloDePiedra {
