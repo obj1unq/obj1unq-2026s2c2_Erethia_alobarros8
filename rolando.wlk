@@ -4,16 +4,9 @@ object rolando {
   const historialEncuentros = []
   var vivienda = castilloDePiedra
   var poderBase = 5
-  const artefactosUsadosEnBatallas = []
-
+  
   method poderDeBatalla() {
     return mochila.sum { artefacto => artefacto.poderDeBatalla(self) } + poderBase
-  }
-
-  method artefactosUsadosEnBatalla() = artefactosUsadosEnBatallas
-
-  method agregarAArtefactosUsadosEnBatalla(artefactos){
-    artefactosUsadosEnBatallas.add(artefactos)
   }
 
   method poderBase(_poderBase){
@@ -76,23 +69,25 @@ object rolando {
   }
 
   method batalla() {
-    artefactosUsadosEnBatallas.addAll(mochila)
-     mochila.forEach({ artefacto => artefacto.usar(self) })
+  
+    mochila.forEach({ artefacto => artefacto.usar(self) })
     poderBase += 1
   }
 
 }
 
 object espadaDelDestino {
-
+var batallas = 0
 method poderDeBatalla(personaje) {
-  return if (personaje.artefactosUsadosEnBatalla().contains(self)){
+  return if (batallas >= 1){
       personaje.poderBase() * 0.50
     }else{
       personaje.poderBase()
     }
   }
-method usar(personaje) {}
+method usar(personaje) {
+  batallas += 1
+}
 }
 object libroDeHechizos {
   const hechizos = []
@@ -133,9 +128,9 @@ object invisibilidad {
 
 object invocacion {
   method poderDeBatalla(personaje) {
-    const artefactosEnMorada = personaje.vivienda().baulCastillo()
-    return if (not artefactosEnMorada.isEmpty()) {
-      const masPoderoso = artefactosEnMorada.max({ artefacto => artefacto.poderDeBatalla(personaje) })
+    const artefactosEnVivienda = personaje.vivienda().baulCastillo()
+    return if (not artefactosEnVivienda.isEmpty()) {
+      const masPoderoso = artefactosEnVivienda.max({ artefacto => artefacto.poderDeBatalla(personaje) })
       masPoderoso.poderDeBatalla(personaje)
     } else {
       0
@@ -145,14 +140,17 @@ object invocacion {
 
 
 object collarDivino {
+var batallas = 0
 method poderDeBatalla(personaje){
     return if (personaje.poderBase() > 6){
-      3 + personaje.artefactosUsadosEnBatalla().count({ artefacto => artefacto == self })
+      3 + batallas
     }else{
       3
     }
   }  
-method usar(personaje) {}
+method usar(personaje) {
+  batallas += 1
+}
 }
 object armaduraDeAceroValyrio {
 method poderDeBatalla(personaje) {
@@ -173,4 +171,46 @@ object castilloDePiedra {
   method almacenar(artefactos) {
     baulCastillo.addAll(artefactos)
   }
+}
+
+object erethia {
+  const enemigos = [caterina , archibaldo , astra ]
+  method enemigos() {
+    return enemigos
+  }
+  method puedeVencer(personaje) = self.enemigos().filter({ enemigo => enemigo.poderDeBatalla() <= personaje.poderDeBatalla() })
+
+  method viviendasConquistables(personaje) = self.puedeVencer(personaje).map({enemigo => enemigo.vivienda()})
+
+  method esElMasPoderoso(personaje) = 0
+
+}
+
+object caterina {
+  var vivienda = fortalezaDeAcero
+  method vivienda() = vivienda
+  method poderDeBatalla() = 28
+}
+
+object archibaldo {
+  var vivienda = palacioDeMarmol
+  method vivienda() = vivienda
+  method poderDeBatalla() = 16
+}
+object astra {
+  var vivienda = torreDeMarfil
+  method vivienda() = vivienda
+  method poderDeBatalla() = 14
+}
+
+object fortalezaDeAcero {
+  
+}
+
+object palacioDeMarmol {
+  
+}
+
+object torreDeMarfil {
+  
 }

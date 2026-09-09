@@ -165,4 +165,19 @@ describe "Erethia" {
     assert.equals(0, libroDeHechizos.poderDeBatalla(rolando))
     assert.equals(8, rolando.poderDeBatalla())
   }
+
+  test "Enemigos que puede vencer y moradas conquitables (Parte 2.3)" {
+
+    rolando.poderBase(5)
+    rolando.capacidadMochila(3)
+    rolando.encontrar(collarDivino)
+    rolando.encontrar(espadaDelDestino)
+    rolando.encontrar(armaduraDeAceroValyrio)
+    assert.equals(19, rolando.poderDeBatalla())
+    assert.equals([archibaldo , astra], erethia.puedeVencer(rolando))
+    assert.equals([palacioDeMarmol , torreDeMarfil], erethia.viviendasConquistables(rolando))
+
+  }
+  
 }
+
