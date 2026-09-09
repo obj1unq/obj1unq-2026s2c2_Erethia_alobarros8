@@ -5,6 +5,10 @@ object rolando {
   var vivienda = castilloDePiedra
   var poderBase = 5
   
+  method tieneArtefactoFatalParaDerrotarA(enemigo) {
+    return self.posesiones().contains(enemigo.puntoDebil()) 
+  }
+
   method poderDeBatalla() {
     return mochila.sum { artefacto => artefacto.poderDeBatalla(self) } + poderBase
   }
@@ -188,17 +192,20 @@ object erethia {
 
 object caterina {
   var vivienda = fortalezaDeAcero
+  method puntoDebil() = libroDeHechizos
   method vivienda() = vivienda
   method poderDeBatalla() = 28
 }
 
 object archibaldo {
   var vivienda = palacioDeMarmol
+  method puntoDebil() = armaduraDeAceroValyrio
   method vivienda() = vivienda
   method poderDeBatalla() = 16
 }
 object astra {
   var vivienda = torreDeMarfil
+  method puntoDebil() = espadaDelDestino
   method vivienda() = vivienda
   method poderDeBatalla() = 14
 }

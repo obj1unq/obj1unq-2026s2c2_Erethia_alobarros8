@@ -190,6 +190,8 @@ describe "Erethia" {
     assert.equals([caterina , archibaldo , astra ], erethia.puedeVencer(rolando))
     assert.equals([fortalezaDeAcero , palacioDeMarmol , torreDeMarfil], erethia.viviendasConquistables(rolando))
     assert.equals(true, erethia.esElMasPoderoso(rolando))
+    assert.equals(true, rolando.tieneArtefactoFatalParaDerrotarA(astra))
+    assert.equals(false, rolando.tieneArtefactoFatalParaDerrotarA(caterina))
   }
   
 }
