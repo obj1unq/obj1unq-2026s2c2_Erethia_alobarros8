@@ -178,6 +178,19 @@ describe "Erethia" {
     assert.equals([palacioDeMarmol , torreDeMarfil], erethia.viviendasConquistables(rolando))
 
   }
+
+  test "Erolando el personaje mas poderoso de erethia, tiene que vencer a todos los enemigos(Parte 2.4)" {
+
+    rolando.poderBase(10)
+    rolando.capacidadMochila(3)
+    rolando.encontrar(collarDivino)
+    rolando.encontrar(espadaDelDestino)
+    rolando.encontrar(armaduraDeAceroValyrio)
+    assert.equals(29, rolando.poderDeBatalla())
+    assert.equals([caterina , archibaldo , astra ], erethia.puedeVencer(rolando))
+    assert.equals([fortalezaDeAcero , palacioDeMarmol , torreDeMarfil], erethia.viviendasConquistables(rolando))
+    assert.equals(true, erethia.esElMasPoderoso(rolando))
+  }
   
 }
 

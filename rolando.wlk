@@ -182,7 +182,7 @@ object erethia {
 
   method viviendasConquistables(personaje) = self.puedeVencer(personaje).map({enemigo => enemigo.vivienda()})
 
-  method esElMasPoderoso(personaje) = 0
+  method esElMasPoderoso(personaje) = self.puedeVencer(personaje) == self.enemigos()
 
 }
 
