@@ -139,4 +139,30 @@ describe "Erethia" {
 
     } 
       
+    test "Uso del Libro de Hechizos y descarte en batallas (Parte 2.2)" {
+    rolando.poderBase(5)
+    rolando.capacidadMochila(3)
+
+    castilloDePiedra.almacenar([espadaDelDestino, armaduraDeAceroValyrio, collarDivino])
+    libroDeHechizos.hechizos([bendicion, invisibilidad, invocacion])
+    rolando.encontrar(libroDeHechizos)
+
+    assert.equals(4, libroDeHechizos.poderDeBatalla(rolando))
+    assert.equals(9, rolando.poderDeBatalla())
+
+    rolando.batalla()
+    assert.equals(6, rolando.poderBase())
+    assert.equals(6, libroDeHechizos.poderDeBatalla(rolando))
+    assert.equals(12, rolando.poderDeBatalla())
+
+    rolando.batalla()
+    assert.equals(7, rolando.poderBase())
+    assert.equals(7, libroDeHechizos.poderDeBatalla(rolando))
+    assert.equals(14, rolando.poderDeBatalla())
+
+    rolando.batalla()
+    assert.equals(8, rolando.poderBase())
+    assert.equals(0, libroDeHechizos.poderDeBatalla(rolando))
+    assert.equals(8, rolando.poderDeBatalla())
+  }
 }

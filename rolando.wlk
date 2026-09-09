@@ -147,7 +147,7 @@ object invocacion {
 object collarDivino {
 method poderDeBatalla(personaje){
     return if (personaje.poderBase() > 6){
-      3 + personaje.artefactosUsadosEnBatalla().count(self)
+      3 + personaje.artefactosUsadosEnBatalla().count({ artefacto => artefacto == self })
     }else{
       3
     }
